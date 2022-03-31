@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recording dependencies &mdash; Reproducible research  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx_lesson.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx_rtd_theme_ext_color_contrast.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Recording computational steps" href="../workflow-management/" />
+    <link rel="prev" title="Organizing your projects" href="../organizing-projects/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../" class="icon icon-home"> Reproducible research
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Core episodes</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../motivation/">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../organizing-projects/">Organizing your projects</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Recording dependencies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#conda-anaconda-pip-virtualenv-pipenv-pyenv-poetry-requirements-txt">Conda, Anaconda, pip, Virtualenv, Pipenv, pyenv, Poetry, requirements.txt …</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exercise-different-solutions-to-specify-requirements">Exercise - Different solutions to specify requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pip-and-pypi">Pip and PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conda">Conda</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-conda-to-share-a-package">Using conda to share a package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#exercise-exploring-conda-environments">Exercise - Exploring conda environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#other-dependency-management-tools">Other dependency management tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#python">Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#r">R</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c-c">C/C++</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fortran">Fortran</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#julia">Julia</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow-management/">Recording computational steps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../environments/">Recording environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sharing/">Sharing code and data</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optional episodes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../docker/">Creating and sharing a container image</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/">List of exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/">Instructor guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/">Quick reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Reproducible research</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
+      <li>Recording dependencies</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/coderefinery/reproducible-research/blob/main/content/dependencies.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="recording-dependencies">
+<h1>Recording dependencies<a class="headerlink" href="#recording-dependencies" title="Permalink to this headline"></a></h1>
+<div class="admonition-questions questions admonition" id="questions-0">
+<p class="admonition-title">Questions</p>
+<ul class="simple">
+<li><p>How can we communicate different versions of software dependencies?</p></li>
+</ul>
+</div>
+<div class="admonition-instructor-note instructor-note admonition" id="instructor-note-0">
+<p class="admonition-title">Instructor note</p>
+<ul class="simple">
+<li><p>15 min teaching</p></li>
+<li><p>15 min exercises</p></li>
+</ul>
+</div>
+<p>Our codes often depend on other codes that in turn depend on other codes …</p>
+<ul class="simple">
+<li><p><strong>Reproducibility</strong>: We can control our code but how can we control dependencies?</p></li>
+<li><p><strong>10-year challenge</strong>: Try to build/run your own code that you have created 10 (or less) years ago. Will your code
+from today work in 5 years if you don’t change it?</p></li>
+<li><p><strong>Dependency hell</strong>: Different codes on the same environment can have conflicting dependencies.</p></li>
+</ul>
+<hr class="docutils" />
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../_images/python_environment.png"><img alt="Python environment" src="../_images/python_environment.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">From <a class="reference external" href="https://xkcd.com/">xkcd</a>.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<section id="conda-anaconda-pip-virtualenv-pipenv-pyenv-poetry-requirements-txt">
+<h2>Conda, Anaconda, pip, Virtualenv, Pipenv, pyenv, Poetry, requirements.txt …<a class="headerlink" href="#conda-anaconda-pip-virtualenv-pipenv-pyenv-poetry-requirements-txt" title="Permalink to this headline"></a></h2>
+<p>These tools try to solve the following problems:</p>
+<ul class="simple">
+<li><p>Installing a <strong>specific set of dependencies</strong>, possibly with well defined versions</p></li>
+<li><p><strong>Recording the versions</strong> for all dependencies</p></li>
+<li><p><strong>Isolate environments</strong> on your computer for projects that have conflicting dependencies</p></li>
+<li><p>Isolate environments on computers with many users</p></li>
+<li><p>Using <strong>different Python/R versions</strong> per project</p></li>
+<li><p>Provide tools and services to <strong>share packages</strong></p></li>
+</ul>
+<p>Isolated environments are also useful because they help you make sure
+that you know your dependencies!</p>
+<hr class="docutils" />
+</section>
+<section id="exercise-different-solutions-to-specify-requirements">
+<span id="different-solutions-to-specify-requirements"></span><h2>Exercise - Different solutions to specify requirements<a class="headerlink" href="#exercise-different-solutions-to-specify-requirements" title="Permalink to this headline"></a></h2>
+<div class="admonition-dependencies-1-comparing-requirements exercise important admonition" id="exercise-0">
+<p class="admonition-title">Dependencies-1: Comparing requirements</p>
+<p>Compare these four requirements.txt</p>
+<p><strong>A</strong>:</p>
+<p>Code depends on a number of packages but there is no <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file or equivalent.</p>
+<p><strong>B</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scipy</span>
+<span class="n">numpy</span>
+<span class="n">sympy</span>
+<span class="n">click</span>
+<span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">someuser</span><span class="o">/</span><span class="n">someproject</span><span class="o">.</span><span class="n">git</span><span class="nd">@master</span>
+<span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">anotheruser</span><span class="o">/</span><span class="n">anotherproject</span><span class="o">.</span><span class="n">git</span><span class="nd">@master</span>
+</pre></div>
+</div>
+<p><strong>C</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scipy</span><span class="o">==</span><span class="mf">1.3.1</span>
+<span class="n">numpy</span><span class="o">==</span><span class="mf">1.16.4</span>
+<span class="n">sympy</span><span class="o">==</span><span class="mf">1.4</span>
+<span class="n">click</span><span class="o">==</span><span class="mf">7.0</span>
+<span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">someuser</span><span class="o">/</span><span class="n">someproject</span><span class="o">.</span><span class="n">git</span><span class="nd">@d7b2c7e</span>
+<span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">anotheruser</span><span class="o">/</span><span class="n">anotherproject</span><span class="o">.</span><span class="n">git</span><span class="nd">@sometag</span>
+</pre></div>
+</div>
+<p><strong>D</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scipy</span><span class="o">==</span><span class="mf">1.3.1</span>
+<span class="n">numpy</span><span class="o">==</span><span class="mf">1.16.4</span>
+<span class="n">sympy</span><span class="o">==</span><span class="mf">1.4</span>
+<span class="n">click</span><span class="o">==</span><span class="mf">7.0</span>
+<span class="n">someproject</span><span class="o">==</span><span class="mf">1.2.3</span>
+<span class="n">anotherproject</span><span class="o">==</span><span class="mf">2.3.4</span>
+</pre></div>
+</div>
+<div class="admonition-solution solution important dropdown admonition" id="solution-0">
+<p class="admonition-title">Solution</p>
+<p><strong>A</strong>: If there is no requirements.txt file (or similar), it might become very difficult
+for others to create the software environment required to run your software. This can
+also apply to yourself in the future!</p>
+<p><strong>B</strong>: Having a requirements.txt file is definitely better than nothing. However, if the
+versions are not specified you or someone else might run into problems with dependencies,
+deprecated features, changes in package APIs etc.</p>
+<p><strong>C</strong> and <strong>D</strong>: In both these cases exact versions of all dependencies are specified and
+both others and you yourself can recreate the software environment required for the project.
+<strong>D</strong> is slightly preferable because version numbers are easier to understand than Git
+commit hashes or Git tags.</p>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="pip-and-pypi">
+<h2>Pip and <a class="reference external" href="https://pypi.org">PyPI</a><a class="headerlink" href="#pip-and-pypi" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Python Package Index.</p></li>
+<li><p>Standard place to share Python packages.</p></li>
+<li><p>Also mixed-language packages are possible wrapped in a Python layer.</p></li>
+<li><p>Install a package:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install somepackage
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Install a specific version:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install somepackage==1.2.3
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Freeze the current environment into <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip freeze &gt; requirements.txt
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Install all dependencies listed in <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install -r requirements.txt
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Creating and sharing your own package: <a class="reference external" href="https://packaging.python.org/tutorials/packaging-projects/">https://packaging.python.org/tutorials/packaging-projects/</a></p></li>
+<li><p>It is possible to pip install from GitHub or other places:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install git+https://github.com/anotheruser/anotherproject.git@sometag
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="conda">
+<h2><a class="reference external" href="https://docs.conda.io/en/latest/">Conda</a><a class="headerlink" href="#conda" title="Permalink to this headline"></a></h2>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/conda_cartoon.jpeg"><img alt="Conda cartoon" src="../_images/conda_cartoon.jpeg" style="width: 100%;" /></a>
+</figure>
+<ul class="simple">
+<li><p>Not only for Python: any language, also binaries.</p></li>
+<li><p>Created by Continuum Analytics, part of Anaconda/Miniconda, but can be installed standalone.</p></li>
+<li><p>Open source BSD license.</p></li>
+<li><p>Manages isolated software environments.</p></li>
+<li><p>Allows you to create and share conda packages.</p></li>
+<li><p><a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a> is a lightweight alternative to <a class="reference external" href="https://www.anaconda.com">Anaconda</a>.</p></li>
+<li><p>Install a package:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ conda install somepackage
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Install a specific version:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ conda install somepackage=1.2.3
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Create a new environment:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ conda create --name myenvironment
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Create a new environment from <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ conda create --name myenvironment --file requirements.txt
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>On e.g. HPC systems where you don’t have write access to central
+installation directory:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ conda create --prefix /some/path/to/env
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Activate a specific environment:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ conda activate myenvironment
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Deactivate current environment:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ conda deactivate
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>List all environments:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ conda info -e
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Freeze the current environment into <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ conda list --export &gt; requirements.txt
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Freeze the current environment into <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code>:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ conda env export &gt; environment.yml
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>To clean unnecessary cached files (which grow quickly over time):</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ conda clean # needs one flag, add --help for available options
+</pre></div>
+</div>
+<section id="using-conda-to-share-a-package">
+<h3>Using conda to share a package<a class="headerlink" href="#using-conda-to-share-a-package" title="Permalink to this headline"></a></h3>
+<p>Conda packages can be built from a <em>recipe</em> and shared on
+<a class="reference external" href="https://anaconda.org/">anaconda.org</a> via
+<a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/create-custom-channels.html">your own private or public channel</a>, or
+via <a class="reference external" href="https://conda-forge.org">conda-forge</a>.</p>
+<ul class="simple">
+<li><p>conda-forge is a GitHub organization containing repositories of conda
+recipes.</p></li>
+<li><p>Has become the de facto standard channel for packages.</p></li>
+<li><p>Several continuous integration providers ensure that each repository
+(“feedstock”) automatically builds its own recipe on Windows, Linux and OSX.</p></li>
+</ul>
+<p>A step-by-step guide on how to contribute packages can be found in the
+<a class="reference external" href="http://conda-forge.org/docs/maintainer/adding_pkgs.html">conda-forge documentation</a>.</p>
+<hr class="docutils" />
+</section>
+</section>
+<section id="exercise-exploring-conda-environments">
+<span id="exploring-conda-environments"></span><h2>Exercise - Exploring conda environments<a class="headerlink" href="#exercise-exploring-conda-environments" title="Permalink to this headline"></a></h2>
+<div class="admonition-dependencies-2-working-with-conda exercise important admonition" id="exercise-1">
+<p class="admonition-title">Dependencies-2: Working with conda</p>
+<ul class="simple">
+<li><p>Inspect your available environments with <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">info</span> <span class="pre">-e</span></code>.</p></li>
+<li><p>Deactivate the current environment with <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">deactivate</span></code>.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">base</span></code> to change to the base environment.</p></li>
+<li><p>List the packages in the base environment with <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">list</span></code>. How many packages are there?</p></li>
+<li><p>Activate the coderefinery environment with <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">coderefinery</span></code>.
+List the packages with <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">list</span></code>.</p></li>
+<li><p>Details of the conda installation can be shown with <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">info</span></code>.
+Which is the active environment? Where are the packages stored?
+Where are the environments stored?</p></li>
+<li><p>Create a new environment with <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">create</span> <span class="pre">--name</span> <span class="pre">myenv</span></code> <strong>and activate it</strong>.</p></li>
+<li><p>Install the <code class="docutils literal notranslate"><span class="pre">pandas</span></code> package using <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">pandas</span></code>.</p></li>
+<li><p>Export the requirements into requirements.txt with <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">list</span> <span class="pre">--export</span> <span class="pre">&gt;</span> <span class="pre">requirements.txt</span></code>.</p></li>
+<li><p>Export the full environment using <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">export</span> <span class="pre">&gt;</span> <span class="pre">environment.yml</span></code>, and
+compare the <code class="docutils literal notranslate"><span class="pre">.yml</span></code> file format to the <code class="docutils literal notranslate"><span class="pre">.txt</span></code> file format.</p></li>
+<li><p>If you want to make sure your new environment.yml is correct,
+you can use it to create a new
+test environment using <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">create</span> <span class="pre">-n</span> <span class="pre">&lt;envname&gt;</span> <span class="pre">-f</span> <span class="pre">&lt;file.yml&gt;</span></code>.
+Were any new packages installed?
+You can delete the test environment with
+<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">remove</span> <span class="pre">-n</span> <span class="pre">&lt;envname&gt;</span></code> or simply remove the directory of the
+environment (that you can find using <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">info</span> <span class="pre">-e</span></code>).</p></li>
+</ul>
+</div>
+</section>
+<hr class="docutils" />
+<section id="other-dependency-management-tools">
+<h2>Other dependency management tools<a class="headerlink" href="#other-dependency-management-tools" title="Permalink to this headline"></a></h2>
+<section id="python">
+<h3>Python<a class="headerlink" href="#python" title="Permalink to this headline"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://docs.python-guide.org/dev/virtualenvs/">Virtualenv</a></p>
+<ul class="simple">
+<li><p>Example use:</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># creating a new env</span>
+$ virtualenv myenvironment
+$ virtualenv --python<span class="o">=</span>python3 myenvironment
+$ virtualenv /path/to/myenvironment
+<span class="c1"># activating env, installing package and deactivating</span>
+$ <span class="nb">source</span> myenvironment/bin/activate
+$ pip install somepackage
+$ deactivate
+</pre></div>
+</div>
+</li>
+<li><p><a class="reference external" href="https://pipenv.readthedocs.io">Pipenv</a></p>
+<ul class="simple">
+<li><p>Alternative to virtualenv: you can activate and install in one step</p></li>
+<li><p>Tool to easily manage per-project/per-directory Python <strong>packages</strong></p></li>
+<li><p>Easier than virtualenv to separate dependencies for development and usage</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://poetry.eustace.io">Poetry</a></p>
+<ul class="simple">
+<li><p>Alternative to virtualenv and Pipenv</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://github.com/pyenv/pyenv">Pyenv</a></p>
+<ul class="simple">
+<li><p>Tool to easily manage per-project/per-directory Python <strong>versions</strong></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://github.com/mamba-org/mamba">Mamba</a></p>
+<ul class="simple">
+<li><p>works like conda, but resolves dependencies faster</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="r">
+<h3>R<a class="headerlink" href="#r" title="Permalink to this headline"></a></h3>
+<p>Good overview of use cases, strategies and tools for reproducible
+environment at
+<a class="reference external" href="https://environments.rstudio.com">Reproducible Environments</a>.</p>
+<p>There are many tools available:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://rstudio.github.io/packrat/">packrat</a></p>
+<ul>
+<li><p>Package from RStudio to isolate environment. Uses a packrat.lock file for storing dependencies</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://github.com/ankane/jetpack">Jetpack</a></p>
+<ul>
+<li><p>Designed as a CLI on top of packrat. Uses the DESCRIPTION file to store your project dependencies</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://rsuite.io/">RSuite</a></p></li>
+<li><p><a class="reference external" href="https://github.com/cole-brokamp/automagic">automagic</a></p></li>
+<li><p><a class="reference external" href="https://github.com/MilesMcBain/deplearning">deplearning</a></p></li>
+<li><p><a class="reference external" href="https://github.com/r-lib/devtools">devtools</a></p></li>
+<li><p>Are you using something else? Please send a
+<a class="reference external" href="https://github.com/coderefinery/reproducible-research">pull request</a>!</p></li>
+</ul>
+</section>
+<section id="c-c">
+<h3>C/C++<a class="headerlink" href="#c-c" title="Permalink to this headline"></a></h3>
+<p>There are no standard methods or tools to handle dependencies in
+C/C++, but useful tools include:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://cmake.org/">CMake</a></p>
+<ul>
+<li><p>Open-source, cross-platform family of tools designed to build,
+test and package software (see also the <a class="reference external" href="https://coderefinery.github.io/cmake/">CodeRefinery lesson on
+CMake</a>)</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://conan.io/">Conan</a></p>
+<ul>
+<li><p>A C/C++ package manager for Developers</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://docs.conda.io/en/latest/">Conda</a></p>
+<ul>
+<li><p>Works with any language, in principle</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="fortran">
+<h3>Fortran<a class="headerlink" href="#fortran" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/fortran-lang/fpm">Fortran Package Manager</a> A package manager and build system for Fortran.</p></li>
+</ul>
+</section>
+<section id="julia">
+<h3>Julia<a class="headerlink" href="#julia" title="Permalink to this headline"></a></h3>
+<p>The inbuilt package manager in Julia,
+<a class="reference external" href="https://pkgdocs.julialang.org/v1/">Pkg.jl</a>, is designed around using
+isolated environments with independent sets of packages. Environments
+can either be local to a particular project or shared and selected by
+name.</p>
+</section>
+</section>
+<section id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://semver.org/">Semantic Versioning</a></p></li>
+<li><p><a class="reference external" href="http://faq.sealedabstract.com/why_not_semver/">Alternative opinion: Why not semver?</a></p></li>
+</ul>
+<div class="admonition-keypoints keypoints admonition" id="keypoints-0">
+<p class="admonition-title">Keypoints</p>
+<ul class="simple">
+<li><p>Capturing software dependencies is a must for reproducibility.</p></li>
+<li><p>Files like <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code>, <code class="docutils literal notranslate"><span class="pre">Pipenv</span></code>, …, should be part of the source repository.</p></li>
+<li><p>Be skeptical when you see dependency lists without versions.</p></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../organizing-projects/" class="btn btn-neutral float-left" title="Organizing your projects" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../workflow-management/" class="btn btn-neutral float-right" title="Recording computational steps" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright CodeRefinery team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

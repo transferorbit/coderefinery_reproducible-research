@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creating and sharing a container image &mdash; Reproducible research  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx_lesson.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx_rtd_theme_ext_color_contrast.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="List of exercises" href="../exercises/" />
+    <link rel="prev" title="Sharing code and data" href="../sharing/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../" class="icon icon-home"> Reproducible research
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Core episodes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../motivation/">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../organizing-projects/">Organizing your projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dependencies/">Recording dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow-management/">Recording computational steps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../environments/">Recording environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sharing/">Sharing code and data</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optional episodes</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Creating and sharing a container image</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#docker-fundamentals">Docker fundamentals</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-are-docker-images-and-containers">What are Docker images and containers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#docker-commands">Docker commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-docker-images">Building Docker images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#containerizing-our-workflow">Containerizing our workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#starting-containers-from-images">Starting containers from images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#managing-data">Managing data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sharing-a-docker-image">Sharing a Docker image</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/">List of exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/">Instructor guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/">Quick reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Reproducible research</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
+      <li>Creating and sharing a container image</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/coderefinery/reproducible-research/blob/main/content/docker.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="creating-and-sharing-a-container-image">
+<h1>Creating and sharing a container image<a class="headerlink" href="#creating-and-sharing-a-container-image" title="Permalink to this headline"></a></h1>
+<div class="admonition-instructor-note instructor-note admonition" id="instructor-note-0">
+<p class="admonition-title">Instructor note</p>
+<ul class="simple">
+<li><p>10 min teaching</p></li>
+<li><p>10 min exercises</p></li>
+</ul>
+</div>
+<section id="docker-fundamentals">
+<h2>Docker fundamentals<a class="headerlink" href="#docker-fundamentals" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Docker is a client-server application. The Docker client talks to the Docker server
+or daemon, which, in turn, does all the work.</p></li>
+</ul>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/docker_architecture.svg"><img alt="Research comic" src="../_images/docker_architecture.svg" width="100%" /></a>
+</figure>
+<ul class="simple">
+<li><p>Docker client</p>
+<ul>
+<li><p>End user uses Docker client to communicate with Docker daemon .</p></li>
+</ul>
+</li>
+<li><p>Docker daemon</p>
+<ul>
+<li><p>Executes the commands sent to the Docker client. Manages containers, images, builds, etc.</p></li>
+</ul>
+</li>
+<li><p>Docker registry</p>
+<ul>
+<li><p>Stores Docker images. DockerHub and Docker Cloud are public registries that anyone can use, and Docker is configured to look for images on DockerHub by default.</p></li>
+</ul>
+</li>
+</ul>
+<hr class="docutils" />
+<section id="what-are-docker-images-and-containers">
+<h3>What are Docker images and containers<a class="headerlink" href="#what-are-docker-images-and-containers" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>A Docker <em>image</em> is executable package of a piece of software that includes everything needed to run it: code, runtime, system tools, system libraries, settings.</p></li>
+<li><p>When you start the image, you have a running <em>container</em> of this image.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="docker-commands">
+<h3>Docker commands<a class="headerlink" href="#docker-commands" title="Permalink to this headline"></a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">help</span> <span class="pre">&lt;command&gt;</span></code></p></td>
+<td><p>Get help</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">images</span></code></p></td>
+<td><p>List Docker images</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">search</span> <span class="pre">ubuntu</span></code></p></td>
+<td><p>Search Docker images from DockerHub</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">ubuntu</span></code></p></td>
+<td><p>Pull from DockerHub</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">-i</span> <span class="pre">-t</span> <span class="pre">ubuntu</span></code></p></td>
+<td><p>Start container from pulled image (-i keeps STDIN open, -t provides an interactive shell)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">ps</span></code></p></td>
+<td><p>Check running containers</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">ps</span> <span class="pre">-a</span></code></p></td>
+<td><p>Check all containers (also those not running)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">stop</span> <span class="pre">container_id/name</span></code></p></td>
+<td><p>Stop the container</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">start</span> <span class="pre">-i</span> <span class="pre">container_id/name</span></code></p></td>
+<td><p>Start (in interactive mode) a stopped container</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">rm</span> <span class="pre">&lt;container</span> <span class="pre">name&gt;</span></code></p></td>
+<td><p>Remove a container</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">rmi</span> <span class="pre">&lt;image</span> <span class="pre">name&gt;</span></code></p></td>
+<td><p>Remove an image</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="building-docker-images">
+<h3>Building Docker images<a class="headerlink" href="#building-docker-images" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>An image is built based on a Dockerfile.</p></li>
+<li><p>A Dockerfile contains a series of instructions paired with arguments.</p></li>
+</ul>
+<div class="highlight-vim notranslate"><div class="highlight"><pre><span></span>#version <span class="m">0</span>.<span class="m">1</span>
+FROM ubuntu:<span class="m">16</span>.<span class="m">04</span> <span class="p">(</span>good <span class="k">to</span> mention the image version being used<span class="p">)</span>
+LABEL maintainer<span class="p">=</span><span class="s2">&quot;someone@somewhere.com&quot;</span>
+RUN apt<span class="p">-</span>get <span class="k">update</span>
+...
+</pre></div>
+</div>
+<p>Instructions in the Dockerfile (for full reference, please visit <a class="reference external" href="https://docs.docker.com/engine/reference/builder/">Dockerfile</a>).</p>
+<div class="highlight-vim notranslate"><div class="highlight"><pre><span></span>FROM <span class="p">-</span>  sets the base image <span class="k">for</span> subsequent instructions
+RUN <span class="p">-</span> execute any commands <span class="k">in</span> <span class="k">a</span> <span class="k">new</span> layer <span class="k">on</span> <span class="k">top</span> of the current image and commit the results
+COPY <span class="p">-</span> copies local <span class="k">files</span> from build context into our image
+WORKDIR <span class="p">-</span> provides <span class="k">a</span> way <span class="k">to</span> <span class="k">set</span> the working <span class="nb">directory</span> <span class="k">for</span> the container when <span class="k">a</span> container <span class="k">is</span> launched from the image
+CMD <span class="p">-</span>  specifies the command <span class="k">to</span> run when <span class="k">a</span> container <span class="k">is</span> launched
+LABEL <span class="p">-</span> adds metadata <span class="k">to</span> an image and <span class="k">is</span> <span class="k">a</span> <span class="nb">key</span><span class="p">-</span>value pair
+..
+..
+</pre></div>
+</div>
+<div class="admonition-mnemonics discussion attention admonition" id="discussion-0">
+<p class="admonition-title">Mnemonics</p>
+<ul class="simple">
+<li><p>The Dockerfile is like a cooking recipe, building an image from the
+Dockerfile is like doing the actual cooking.</p></li>
+<li><p>Running the Docker image to create a container doesn’t have a good
+cooking analogy, but:</p>
+<ul>
+<li><p>a Docker image is like a <em>class</em> in OOP, a Docker container is like an instance of the class.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<hr class="docutils" />
+<section id="containerizing-our-workflow">
+<h3>Containerizing our workflow<a class="headerlink" href="#containerizing-our-workflow" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><p>This exercise is based on the <a class="reference external" href="https://github.com/coderefinery/word-count">same example project</a> as in the previous episodes.</p>
+</div></blockquote>
+<blockquote>
+<div><p>If you would like to type along but you don’t have Docker installed, you
+can log in to the <a class="reference external" href="https://training.play-with-docker.com/">“Play with Docker Classroom”</a> which gives you access to Docker in the cloud.
+You can first click <a class="reference external" href="https://training.play-with-docker.com/ops-stage1">Stage 1: The Basics</a>
+and then <a class="reference external" href="https://training.play-with-docker.com/ops-s1-hello">Your First Linux Containers</a>,
+and finally “Log in to access”</p>
+</div></blockquote>
+<p>Let’s create a Dockerfile for our example project.
+It is available in the project repository if you want to experiment with
+it later.</p>
+<div class="highlight-vim notranslate"><div class="highlight"><pre><span></span>#version <span class="m">0</span>.<span class="m">1</span>
+FROM ubuntu:<span class="m">20</span>.<span class="m">04</span>
+# <span class="k">set</span> timezone
+ENV TZ<span class="p">=</span>Europe/Stockholm
+RUN ln <span class="p">-</span>snf <span class="sr">/usr/</span>share<span class="sr">/zoneinfo/</span>$TZ <span class="sr">/etc/</span>localtime &amp;&amp; echo $TZ <span class="p">&gt;</span> <span class="sr">/etc/</span>timezone
+
+#maintainer information
+LABEL maintainer<span class="p">=</span><span class="s2">&quot;someone@somewhere.se&quot;</span>
+
+# <span class="k">update</span> the apt package manager and install python and nano
+RUN apt<span class="p">-</span>get <span class="k">update</span> &amp;&amp; apt<span class="p">-</span>get install <span class="p">-</span><span class="k">y</span> <span class="k">python3</span>.<span class="m">9</span> <span class="k">python3</span><span class="p">-</span>pip nano
+
+# install python packages
+RUN pip3 install <span class="p">--</span>no<span class="p">-</span>input numpy<span class="p">==</span><span class="m">1</span>.<span class="m">20</span>.<span class="m">2</span> matplotlib<span class="p">==</span><span class="m">3</span>.<span class="m">4</span>.<span class="m">1</span> snakemake<span class="p">==</span><span class="m">7</span>.<span class="m">1</span>.<span class="m">1</span>
+
+# copy project <span class="k">to</span> container
+COPY .<span class="sr">/ /</span><span class="k">opt</span><span class="sr">/word_count/</span>
+
+# <span class="k">set</span> work <span class="nb">directory</span> <span class="k">in</span> container
+WORKDIR <span class="sr">/opt/</span>word_count
+
+# default command <span class="k">to</span> execute when container starts
+CMD <span class="sr">/bin/</span>bash
+</pre></div>
+</div>
+<p>We can build the image by running docker build in the word_count directory containing Dockerfile:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ docker build -t word_count:0.1 .
+</pre></div>
+</div>
+<p>This will take a few minutes…</p>
+<p>Check if the image is created:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ docker images
+
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+word_count          <span class="m">0</span>.1                 3103c7bde05b        <span class="m">4</span> minutes ago       744MB
+ubuntu              <span class="m">16</span>.04               7aa3602ab41e        <span class="m">3</span> weeks ago         115MB
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>We now have two images, the <em>base image</em> <code class="docutils literal notranslate"><span class="pre">ubuntu:20.04</span></code> is the parent of our <code class="docutils literal notranslate"><span class="pre">word_count:0.1</span></code> image.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="starting-containers-from-images">
+<h3>Starting containers from images<a class="headerlink" href="#starting-containers-from-images" title="Permalink to this headline"></a></h3>
+<p>We can run a container using <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ docker run -i -t --name wordcount word_count:0.1
+</pre></div>
+</div>
+<p>Note: Use -d to start a container in the background in a detached mode (to create long-running containers).</p>
+<p>We can now see the running container (in another terminal):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ docker ps
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="managing-data">
+<h3>Managing data<a class="headerlink" href="#managing-data" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>Docker containers should be disposable - the data must be saved elsewhere.</p></li>
+<li><p>A Docker volume allows data to persist, even when a container is deleted. Volumes are also a convenient way to share data between the host and the container.</p></li>
+<li><p>For details on volumes, <a class="reference external" href="https://docs.docker.com/engine/admin/volumes/">refer to the documentation</a> page.</p></li>
+</ul>
+<p><strong>Sharing a host directory with container</strong></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ docker run -it --name my-directory-test -v &lt;path-on-hostmachine&gt;:/opt/data &lt;image_name&gt;
+</pre></div>
+</div>
+<p><strong>Anyone with this image can reproduce the results we have generated</strong></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ docker run -v &lt;path-on-hostmachine/results_directory&gt;:/opt/word_count/results word_count:0.1 snakemake -s Snakefile_all
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">results_directory</span></code> folder will have the results of our word count example project.</p>
+<p>We can also specify snakemake (or  any other command) as the default command to run when our container starts, by giving it as parameter for CMD in Dockerfile.</p>
+</section>
+<hr class="docutils" />
+<section id="sharing-a-docker-image">
+<h3>Sharing a Docker image<a class="headerlink" href="#sharing-a-docker-image" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>DockerHub - A platform to share Docker images.</p></li>
+<li><p>Login to DockerHub:</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ docker login
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Push to DockerHub. The image name has to be in <strong>youruser/yourimage</strong> format:</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ docker tag TAGID YOURUSER/word_count
+$ docker push docker.io/YOURUSER/word_count
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>For proprietary/sensitive images private Docker registries can be used</p></li>
+<li><p>Sometimes you don’t want to push the image but you want to freeze it locally</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ docker save word_count &gt; word_count_0.1.tar
+</pre></div>
+</div>
+<p>and then you can reload it with</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ docker load --input word_count_0.1.tar
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../sharing/" class="btn btn-neutral float-left" title="Sharing code and data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../exercises/" class="btn btn-neutral float-right" title="List of exercises" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright CodeRefinery team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motivation &mdash; Reproducible research  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx_lesson.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx_rtd_theme_ext_color_contrast.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Organizing your projects" href="../organizing-projects/" />
+    <link rel="prev" title="Reproducible research" href="../" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../" class="icon icon-home"> Reproducible research
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Core episodes</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Motivation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-reproducible-research">What is reproducible research?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#why-all-the-talk-about-reproducible-research">Why all the talk about reproducible research?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#factors-behind-irreproducible-research">Factors behind irreproducible research</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#levels-of-reproducibility">Levels of reproducibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reproducible-replicable-robust-generalisable">Reproducible, replicable, robust, generalisable</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../organizing-projects/">Organizing your projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dependencies/">Recording dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow-management/">Recording computational steps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../environments/">Recording environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sharing/">Sharing code and data</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optional episodes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../docker/">Creating and sharing a container image</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/">List of exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/">Instructor guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/">Quick reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Reproducible research</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
+      <li>Motivation</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/coderefinery/reproducible-research/blob/main/content/motivation.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="motivation">
+<h1>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline"></a></h1>
+<div class="admonition-questions questions admonition" id="questions-0">
+<p class="admonition-title">Questions</p>
+<ul class="simple">
+<li><p>Should research software and data be reproducible?</p></li>
+<li><p>Are they?</p></li>
+</ul>
+</div>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Discuss factors affecting reproducibility in research</p></li>
+</ul>
+</div>
+<div class="admonition-instructor-note instructor-note admonition" id="instructor-note-0">
+<p class="admonition-title">Instructor note</p>
+<ul class="simple">
+<li><p>10 min teaching</p></li>
+<li><p>0 min exercises</p></li>
+</ul>
+</div>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/research_comic_phd.gif"><img alt="Research comic" src="../_images/research_comic_phd.gif" style="width: 100%;" /></a>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A scary anecdote</p>
+<ul class="simple">
+<li><p>A group of researchers obtain great results and submit their work to a high-profile journal.</p></li>
+<li><p>Reviewers ask for new figures and additional analysis.</p></li>
+<li><p>The researchers start working on revisions and generate modified figures, but find inconsistencies with old figures.</p></li>
+<li><p>The researchers can’t find some of the data they used to generate the original results, and
+can’t figure out which parameters they used when running their analyses.</p></li>
+<li><p>The manuscript is still languishing in the drawer …</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<section id="what-is-reproducible-research">
+<h2>What is reproducible research?<a class="headerlink" href="#what-is-reproducible-research" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>“reproducibility refers to the ability of a researcher to <strong>duplicate the
+results</strong> of a prior study using the same materials as were used by the
+original investigator. That is, a second researcher might use the same raw
+data to build the same analysis files and implement the same statistical
+analysis in an attempt to yield the same results. Reproducibility is a
+<strong>minimum necessary condition</strong> for a finding to be believable and informative.”</p>
+<p>– <cite> U.S. National Science Foundation (NSF) subcommittee on replicability in science</cite></p>
+</div></blockquote>
+<ul class="simple">
+<li><p>For any research project, an independent researcher should be able to replicate an experiment:</p>
+<ul>
+<li><p>the same results should be obtained under the same contitions</p></li>
+<li><p>it should be possible to recreate the same conditions</p></li>
+</ul>
+</li>
+<li><p>“Experiment” is interpreted in a wide sense, encompassing also computational work</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="why-all-the-talk-about-reproducible-research">
+<h2>Why all the talk about reproducible research?<a class="headerlink" href="#why-all-the-talk-about-reproducible-research" title="Permalink to this headline"></a></h2>
+<p>A 2016
+<a class="reference external" href="http://www.nature.com/news/1-500-scientists-lift-the-lid-on-reproducibility-1.19970">survey</a>
+in Nature revealed that irreproducible experiments are a problem across all
+domains of science:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/reproducibility_nature.jpg"><img alt="reproduciblity Nature" src="../_images/reproducibility_nature.jpg" style="width: 100%;" /></a>
+</figure>
+</section>
+<hr class="docutils" />
+<section id="factors-behind-irreproducible-research">
+<h2>Factors behind irreproducible research<a class="headerlink" href="#factors-behind-irreproducible-research" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Not enough documentation on how experiment is conducted and data is generated</p></li>
+<li><p>Data used to generate original results unavailable</p></li>
+<li><p>Software used to generate original results unavailable</p></li>
+<li><p>Difficult to recreate software environment (libraries, versions) used to generate original results</p></li>
+<li><p>Difficult to rerun the computational steps</p></li>
+</ul>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/Miracle.jpg"><img alt="Then a mirace occurs" src="../_images/Miracle.jpg" style="width: 100%;" /></a>
+</figure>
+</section>
+<hr class="docutils" />
+<section id="levels-of-reproducibility">
+<h2>Levels of reproducibility<a class="headerlink" href="#levels-of-reproducibility" title="Permalink to this headline"></a></h2>
+<p>A published article is like the top of a pyramid. It rests on multiple
+levels that each contributes to its reproducibility.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/repro-pyramid.png"><img alt="Reproducibility pyramid" src="../_images/repro-pyramid.png" style="width: 100%;" /></a>
+</figure>
+</section>
+<hr class="docutils" />
+<section id="reproducible-replicable-robust-generalisable">
+<h2>Reproducible, replicable, robust, generalisable<a class="headerlink" href="#reproducible-replicable-robust-generalisable" title="Permalink to this headline"></a></h2>
+<p>While reproducibility is the minimum requirement and can be solved with “good enough” computational practices, replicability/robustness/generalisability of scientific findings are an even greater concern involving research misconduct, questionable research practices (p-hacking, HARKing, cherry-picking), sloppy methods, and other conscious and unconscious biases.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/39-reproducible-replicable-robust-generalisable.jpg"><img alt="Reproducible, replicable, robust, generalisable" src="../_images/39-reproducible-replicable-robust-generalisable.jpg" style="width: 100%;" /></a>
+</figure>
+<p>(This image was created by <a class="reference external" href="http://www.scriberia.co.uk">Scriberia</a> for <a class="reference external" href="https://the-turing-way.netlify.com">The
+Turing Way</a> community and is used under a
+CC-BY licence. The image was obtained from <a class="reference external" href="https://zenodo.org/record/3332808">https://zenodo.org/record/3332808</a>.)</p>
+<div class="admonition-discuss-with-your-neighbors-or-among-all-participants discussion attention admonition" id="discussion-0">
+<p class="admonition-title">Discuss with your neighbors or among all participants</p>
+<p>Computer programs are expected to produce the same
+output for the same inputs. Is
+that true for research software?</p>
+<p>Can you give some examples? What can we do about it?</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../" class="btn btn-neutral float-left" title="Reproducible research" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../organizing-projects/" class="btn btn-neutral float-right" title="Organizing your projects" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright CodeRefinery team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

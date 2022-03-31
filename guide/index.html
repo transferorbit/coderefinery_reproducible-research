@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instructor guide &mdash; Reproducible research  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx_lesson.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx_rtd_theme_ext_color_contrast.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Quick reference" href="../reference/" />
+    <link rel="prev" title="List of exercises" href="../exercises/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../" class="icon icon-home"> Reproducible research
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Core episodes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../motivation/">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../organizing-projects/">Organizing your projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dependencies/">Recording dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow-management/">Recording computational steps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../environments/">Recording environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sharing/">Sharing code and data</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optional episodes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../docker/">Creating and sharing a container image</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../exercises/">List of exercises</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Instructor guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#why-we-teach-this-lesson">Why we teach this lesson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#intended-learning-outcomes">Intended learning outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-teach-this-lesson">How to teach this lesson</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-start">How to start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#focus-on-concepts-and-when-to-use-which-tool">Focus on concepts, and when to use which tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#questions-to-involve-participants">Questions to involve participants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#timing">Timing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sessions-which-can-be-skipped-if-time-is-tight">Sessions which can be skipped if time is tight</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#typical-pitfalls">Typical pitfalls</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#indentation-in-snakefiles">Indentation in Snakefiles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#containers-are-confusing">Containers are confusing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/">Quick reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Reproducible research</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
+      <li>Instructor guide</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/coderefinery/reproducible-research/blob/main/content/guide.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="instructor-guide">
+<h1>Instructor guide<a class="headerlink" href="#instructor-guide" title="Permalink to this headline"></a></h1>
+<section id="why-we-teach-this-lesson">
+<h2>Why we teach this lesson<a class="headerlink" href="#why-we-teach-this-lesson" title="Permalink to this headline"></a></h2>
+<p>Reproducibility in research is something that publishers, funding agencies, universities,
+research leaders and the general public worries about and much is being written about it.
+It is also something that researchers care deeply about - this lesson is typically one of the
+most popular lessons in the pre-workshop survey.</p>
+<p>Even though most PhD students, postdocs and researchers (i.e. typical workshop participants)
+know about the importance of reproducibility in research, they often lack both a general
+overview of what different aspects there are to reproducibility, and the knowledge of
+specific tools that can be used for improving reproducibility.</p>
+<p>Many participants may not adhere to good practices when organizing their projects,
+and the “Organizing your projects” episode is meant to encourage participants to
+structure their projects better. This may be obvious to some participants but it
+doesn’t harm to preach to the choir.</p>
+<p>Many participants do not share data or code, and in particular they are often
+unaware that research output other than published articles can be assigned
+digital object identifiers (DOIs).
+The “Sharing code and data” is meant to bring awareness about FAIRness and Open Science
+and to show how DOIs can be obtained for Git repositories..</p>
+<p>Even though many participants know that code can have many dependencies (e.g. they
+may have experienced difficulties in getting other people’s code to run), they
+often don’t know or use good practices when it comes to recording dependencies.
+Most participants also don’t use isolated environments for different projects and
+don’t know why that can be important.
+The episode “Recording dependencies” tries to convey the importance of recording
+dependencies accurately for your projects, and shows how tools like conda can be
+used both as a package and software environment manager.</p>
+<p>Many participants have heard about containers and find them interesting, but
+lack an understanding of how they work or how they can be used. The episode
+“Recording environments” introduces the concept of containers, and the optional
+episode “Creating and sharing a container image” goes into details.</p>
+<p>Many participants use complicated series of computational steps in their research
+without realizing that this work falls into the category of “scientific workflows”,
+and that there actually exist tools that help make such workflows reproducible.
+The episode “Recording computational steps” introduces the concept of scientific
+workflows, discusses various ways of managing workflows with varying degrees of
+reproducibility, and shows how tools like make and snakemake can be used to
+both simplify workflows and make them more reproducible.</p>
+</section>
+<section id="intended-learning-outcomes">
+<h2>Intended learning outcomes<a class="headerlink" href="#intended-learning-outcomes" title="Permalink to this headline"></a></h2>
+<p>By the end of this lesson, learners should:</p>
+<ul class="simple">
+<li><p>understand why it’s important that research is reproducible</p></li>
+<li><p>define multiple levels of reproducibility and the multiple
+factors which can lead to irreproducible research</p></li>
+<li><p>be able to apply well organized directory structure for their project</p></li>
+<li><p>remember the FAIR principles</p></li>
+<li><p>be able to create a DOI for research output like code or data</p></li>
+<li><p>understand that code can have dependencies, and know how to create a requirements file</p></li>
+<li><p>describe how to use conda (or another tool) to manage isolated software environments</p></li>
+<li><p>have an idea about how containers work</p></li>
+<li><p>remember the pros and cons of containers for reproducibility</p></li>
+<li><p>understand that a series of computational steps can be defined as a workflow and
+that many tools exist to manage workflows</p></li>
+<li><p>describe the pros and cons of different methods of performing scientific workflows</p></li>
+<li><p>understand the benefits of using a tool like make or snakemake compared to bespoke scripts</p></li>
+<li><p>be able to create a simple Makefile or Snakefile to manage a workflow</p></li>
+</ul>
+</section>
+<section id="how-to-teach-this-lesson">
+<h2>How to teach this lesson<a class="headerlink" href="#how-to-teach-this-lesson" title="Permalink to this headline"></a></h2>
+<section id="how-to-start">
+<h3>How to start<a class="headerlink" href="#how-to-start" title="Permalink to this headline"></a></h3>
+<p>Everyone knows that scientific results need to be reproducible, but not everyone is using
+appropriate tools to ensure this. Here we’re going to get to know tools which help with
+preserving the provenance of data and reproducibility on different levels, ranging from
+workflow automation to software environment (containers).</p>
+</section>
+<section id="focus-on-concepts-and-when-to-use-which-tool">
+<h3>Focus on concepts, and when to use which tool<a class="headerlink" href="#focus-on-concepts-and-when-to-use-which-tool" title="Permalink to this headline"></a></h3>
+<p>Try to explain better what the different tools are useful for, but don’t go
+into details.  In this lesson we are not trying to gain expertise in the
+various tools and master the details but rather we want to give an overview and
+show that many tools exist and try to give participant the right feel for which
+set of tools to approach for which type of problem.</p>
+</section>
+<section id="questions-to-involve-participants">
+<h3>Questions to involve participants<a class="headerlink" href="#questions-to-involve-participants" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>Have you ever been unable to reproduce a scientific results from previous research by yourself or others?</p></li>
+<li><p>What technical solutions do you use to manage repetitive tasks and/or complicated workflows?</p></li>
+</ul>
+</section>
+<section id="timing">
+<h3>Timing<a class="headerlink" href="#timing" title="Permalink to this headline"></a></h3>
+<p>Depending on workshop schedule, this lesson can become short on time.</p>
+<ul class="simple">
+<li><p>The Snakemake episode is long. The instructor needs to explain what is snakemake, and why use it.
+Snakefile can be covered quickly. Wildcards and pattern rules should be discussed,
+but the optional further topics can be skipped or just very briefly described.
+The exercise(s) in breakoutroom session is then there for the participants to play around
+and get an understanding of the how.</p></li>
+<li><p>Building the container from scratch (fetching the ubuntu image, installing all packages in it)
+can take several minutes. The instructor should in most cases do this before the workshop and
+only demonstrate how to launch a container based on the existing image</p></li>
+</ul>
+</section>
+<section id="sessions-which-can-be-skipped-if-time-is-tight">
+<h3>Sessions which can be skipped if time is tight<a class="headerlink" href="#sessions-which-can-be-skipped-if-time-is-tight" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>The motivation can be gone through quickly. Researchers know the importance of
+reproducibility and we don’t need to spend many words on it</p></li>
+</ul>
+</section>
+<section id="typical-pitfalls">
+<h3>Typical pitfalls<a class="headerlink" href="#typical-pitfalls" title="Permalink to this headline"></a></h3>
+<section id="indentation-in-snakefiles">
+<h4>Indentation in Snakefiles<a class="headerlink" href="#indentation-in-snakefiles" title="Permalink to this headline"></a></h4>
+<ul class="simple">
+<li><p>the body of a rule and the body of an input keyword need to be indented, but the number of spaces doesn’t matter
+This works:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rule</span> <span class="n">alldata</span><span class="p">:</span>
+     <span class="nb">input</span><span class="p">:</span>
+         <span class="s1">&#39;processed_data/isles.dat&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;processed_data/abyss.dat&#39;</span>
+</pre></div>
+</div>
+<p>but this doesn’t work:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rule</span> <span class="n">alldata</span><span class="p">:</span>
+     <span class="nb">input</span><span class="p">:</span>
+     <span class="s1">&#39;processed_data/isles.dat&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;processed_data/abyss.dat&#39;</span>
+</pre></div>
+</div>
+<p>not this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rule</span> <span class="n">alldata</span><span class="p">:</span>
+<span class="nb">input</span><span class="p">:</span>
+    <span class="s1">&#39;processed_data/isles.dat&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;processed_data/abyss.dat&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="containers-are-confusing">
+<h4>Containers are confusing<a class="headerlink" href="#containers-are-confusing" title="Permalink to this headline"></a></h4>
+<p>Try to use good analogies to explain the concepts of containers,
+images and Dockerfiles.</p>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../exercises/" class="btn btn-neutral float-left" title="List of exercises" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../reference/" class="btn btn-neutral float-right" title="Quick reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright CodeRefinery team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

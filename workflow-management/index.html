@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recording computational steps &mdash; Reproducible research  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx_lesson.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx_rtd_theme_ext_color_contrast.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Recording environments" href="../environments/" />
+    <link rel="prev" title="Recording dependencies" href="../dependencies/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../" class="icon icon-home"> Reproducible research
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Core episodes</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../motivation/">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../organizing-projects/">Organizing your projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dependencies/">Recording dependencies</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Recording computational steps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#one-problem-solved-in-4-different-ways">One problem solved in 4 different ways</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#solution-1-graphical-user-interface-gui">Solution 1: Graphical user interface (GUI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#solution-2-manual-steps">Solution 2: Manual steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#solution-3-script">Solution 3: Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#solution-4-using-snakemake">Solution 4: Using Snakemake</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#why-snakemake">Why Snakemake?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#snakemake-vs-make">Snakemake vs. Make</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#integrated-package-management">Integrated package management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#visualizing-the-workflow">Visualizing the workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exercise-using-snakemake">Exercise - Using Snakemake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exercise-snakemake-with-conda-environments">Exercise - Snakemake with conda environments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exercise-snakemake-on-high-performance-computers">Exercise - Snakemake on High Performance Computers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../environments/">Recording environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sharing/">Sharing code and data</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optional episodes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../docker/">Creating and sharing a container image</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/">List of exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/">Instructor guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/">Quick reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Reproducible research</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
+      <li>Recording computational steps</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/coderefinery/reproducible-research/blob/main/content/workflow-management.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="recording-computational-steps">
+<h1>Recording computational steps<a class="headerlink" href="#recording-computational-steps" title="Permalink to this headline"></a></h1>
+<div class="admonition-questions questions admonition" id="questions-0">
+<p class="admonition-title">Questions</p>
+<ul class="simple">
+<li><p>How can we create a reproducible workflow?</p></li>
+<li><p>When to use scientific workflow management systems.</p></li>
+</ul>
+</div>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Discuss pros/cons of GUI vs. manual steps vs. scripted vs. workflow tools.</p></li>
+<li><p>Get familiar with Snakemake.</p></li>
+</ul>
+</div>
+<div class="admonition-instructor-note instructor-note admonition" id="instructor-note-0">
+<p class="admonition-title">Instructor note</p>
+<ul class="simple">
+<li><p>15 min teaching</p></li>
+<li><p>15 min exercises</p></li>
+</ul>
+</div>
+<section id="one-problem-solved-in-4-different-ways">
+<h2>One problem solved in 4 different ways<a class="headerlink" href="#one-problem-solved-in-4-different-ways" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>The following material is partly derived from a <a class="reference external" href="https://hpc-carpentry.github.io/hpc-python/">HPC Carpentry lesson</a></p>
+</div></blockquote>
+<p>In this episode we will work with reproducible workflows for the programs and data in the repository <a class="reference external" href="https://github.com//coderefinery/word-count">word-count</a>. The computing environment needed for performing the exercises can be performed on your own computer as well as on a cloud service.</p>
+<div class="admonition-exercise-preparation prerequisites admonition" id="prerequisites-0">
+<p class="admonition-title">Exercise preparation</p>
+<p><strong>On your own computer</strong>:</p>
+<ul class="simple">
+<li><p>Activate the <a class="reference external" href="https://coderefinery.github.io/installation/conda-environment/">coderefinery conda environment</a> with <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">coderefinery</span></code>.</p></li>
+<li><p>Create an exercise repository in your own namespace by
+<a class="reference external" href="https://help.github.com/en/articles/creating-a-repository-from-a-template">generating from a template</a>
+using this template: <a class="reference external" href="https://github.com//coderefinery/word-count">https://github.com//coderefinery/word-count</a>
+called <code class="docutils literal notranslate"><span class="pre">word-count</span></code></p></li>
+<li><p>Clone the word-count repository with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> </code>.</p></li>
+</ul>
+<p><strong>On Binder</strong>:
+We can also use the cloud service <a class="reference external" href="https://mybinder.org/">Binder</a>
+to make sure we all have the same computing environment.
+This is interesting from a reproducible research point of view and it’s explained further in the <a class="reference external" href="https://coderefinery.github.io/jupyter/sharing/">Jupyter lesson</a> how this is even possible.</p>
+<ul class="simple">
+<li><p>Go to <a class="reference external" href="https://mybinder.org">https://mybinder.org/</a></p></li>
+<li><p>In the box <strong>GitHub repository name or URL</strong> enter: <a class="reference external" href="https://github.com/coderefinery/word-count">https://github.com/coderefinery/word-count</a></p></li>
+<li><p>Click on the <strong>Launch</strong> button.</p></li>
+<li><p>Once it get started, you can open a new Terminal from the <strong>new</strong> menu (top right) and select <strong>Terminal</strong>.</p></li>
+</ul>
+</div>
+<p>The word count project directory listing is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>.
+├── binder
+│   ├── environment.yml
+├── data
+│   ├── abyss.txt
+│   ├── isles.txt
+│   ├── last.txt
+│   ├── LICENSE_TEXTS.md
+│   └── sierra.txt
+├── doc
+│   ├── ...
+│   ...
+├── LICENSE
+├── Makefile
+├── manuscript
+├── matplotlibrc
+├── processed_data
+├── README.md
+├── environment.yml
+├── results
+├── Snakefile
+└── source
+    ├── plotcount.py
+    ├── wordcount.py
+    └── zipf_test.py
+</pre></div>
+</div>
+<p>In this example we wish to:</p>
+<ol class="simple">
+<li><p>Analyze word frequencies using <code class="docutils literal notranslate"><span class="pre">wordcount.py</span></code> for 4 books (they are all in the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory).</p></li>
+<li><p>Plot a histogram using <code class="docutils literal notranslate"><span class="pre">plotcount.py</span></code>.</p></li>
+<li><p>Print the ratio between most common and second most common word for all books.</p></li>
+</ol>
+<p>Example (for one book only) - let us test this out:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python source/wordcount.py data/isles.txt processed_data/isles.dat
+$ python source/plotcount.py processed_data/isles.dat processed_data/isles.png
+$ python source/zipf_test.py processed_data/isles.dat
+</pre></div>
+</div>
+<p>Can you relate? Are you using similar setups in your research?</p>
+<p>This was for one book - how about 3 books? How about 3000 books?</p>
+<p><strong>We will solve this in four different ways and discuss pros and cons.</strong></p>
+</section>
+<hr class="docutils" />
+<section id="solution-1-graphical-user-interface-gui">
+<h2>Solution 1: Graphical user interface (GUI)<a class="headerlink" href="#solution-1-graphical-user-interface-gui" title="Permalink to this headline"></a></h2>
+<p>Disclaimer: not all GUIs behave this way - there exist very good GUI solutions which enable
+reproducibility and automation.</p>
+<p>Imagine we have programmed a GUI with a nice interface with icons where you can select scripts and input files by clicking:</p>
+<ul class="simple">
+<li><p>Click on counting script</p></li>
+<li><p>Select book txt file</p></li>
+<li><p>Give a name for the dat file</p></li>
+<li><p>Click on a run symbol</p></li>
+<li><p>Click on plotting script</p></li>
+<li><p>Select book dat file</p></li>
+<li><p>Give a name for the image file</p></li>
+<li><p>Click on a run symbol</p></li>
+<li><p>…</p></li>
+<li><p>Go to next book …</p></li>
+<li><p>Click on counting script</p></li>
+<li><p>Select book txt file</p></li>
+<li><p>…</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="solution-2-manual-steps">
+<h2>Solution 2: Manual steps<a class="headerlink" href="#solution-2-manual-steps" title="Permalink to this headline"></a></h2>
+<p>It is not too much work:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python source/wordcount.py data/abyss.txt processed_data/abyss.dat
+$ python source/plotcount.py processed_data/abyss.dat processed_data/abyss.png
+
+$ python source/wordcount.py data/isles.txt processed_data/isles.dat
+$ python source/plotcount.py processed_data/isles.dat processed_data/isles.png
+
+$ python source/wordcount.py data/last.txt processed_data/last.dat
+$ python source/plotcount.py processed_data/last.dat processed_data/last.png
+
+$ python source/wordcount.py data/sierra.txt processed_data/sierra.dat
+$ python source/plotcount.py processed_data/sierra.dat processed_data/sierra.png
+
+$ python source/zipf_test.py processed_data/abyss.dat processed_data/isles.dat processed_data/last.dat processed_data/sierra.dat
+</pre></div>
+</div>
+<p>This is <strong>imperative style</strong>: first do this, then to that, then do that, finally do …</p>
+</section>
+<hr class="docutils" />
+<section id="solution-3-script">
+<h2>Solution 3: Script<a class="headerlink" href="#solution-3-script" title="Permalink to this headline"></a></h2>
+<p>Let’s express it more compactly with a shell script (Bash). Let’s call it <code class="docutils literal notranslate"><span class="pre">script.sh</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/usr/bin/env bash
+
+# loop over all books
+for title in abyss isles last sierra; do
+    python source/wordcount.py data/${title}.txt processed_data/${title}.dat
+    python source/plotcount.py processed_data/${title}.dat processed_data/${title}.png
+done
+
+# this could be done using variables but nevermind
+python source/zipf_test.py processed_data/abyss.dat processed_data/isles.dat processed_data/last.dat processed_data/sierra.dat
+</pre></div>
+</div>
+<p>We can run it with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ bash script.sh
+</pre></div>
+</div>
+<p>This is still <strong>imperative style</strong>: we tell the script to run these steps in precisely this order.</p>
+</section>
+<hr class="docutils" />
+<section id="solution-4-using-snakemake">
+<h2>Solution 4: Using <a class="reference external" href="https://snakemake.readthedocs.io/en/stable/index.html">Snakemake</a><a class="headerlink" href="#solution-4-using-snakemake" title="Permalink to this headline"></a></h2>
+<p>Snakemake is inspired by <a class="reference external" href="https://www.gnu.org/software/make/">GNU Make</a>,
+but based on Python and is more general and has easier syntax.
+The workflow below can also be <a class="reference internal" href="../make-alternative/"><span class="doc std std-doc">implemented using make</span></a>.</p>
+<p>First study the <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># a list of all the books we are analyzing</span>
+<span class="n">DATA</span> <span class="o">=</span> <span class="n">glob_wildcards</span><span class="p">(</span><span class="s1">&#39;data/</span><span class="si">{book}</span><span class="s1">.txt&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">book</span>
+
+<span class="c1"># this is for running on HPC resources</span>
+<span class="n">localrules</span><span class="p">:</span> <span class="nb">all</span><span class="p">,</span> <span class="n">make_archive</span>
+
+<span class="c1"># the default rule</span>
+<span class="n">rule</span> <span class="nb">all</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="s1">&#39;zipf_analysis.tar.gz&#39;</span>
+
+<span class="c1"># count words in one of our books</span>
+<span class="c1"># logfiles from each run are put in .log files&quot;</span>
+<span class="n">rule</span> <span class="n">count_words</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="n">wc</span><span class="o">=</span><span class="s1">&#39;source/wordcount.py&#39;</span><span class="p">,</span>
+        <span class="n">book</span><span class="o">=</span><span class="s1">&#39;data/</span><span class="si">{file}</span><span class="s1">.txt&#39;</span>
+    <span class="n">output</span><span class="p">:</span> <span class="s1">&#39;processed_data/</span><span class="si">{file}</span><span class="s1">.dat&#39;</span>
+    <span class="n">log</span><span class="p">:</span> <span class="s1">&#39;processed_data/</span><span class="si">{file}</span><span class="s1">.log&#39;</span>
+    <span class="n">shell</span><span class="p">:</span> <span class="s1">&#39;python </span><span class="si">{input.wc}</span><span class="s1"> </span><span class="si">{input.book}</span><span class="s1"> </span><span class="si">{output}</span><span class="s1"> &gt;&gt; </span><span class="si">{log}</span><span class="s1"> 2&gt;&amp;1&#39;</span>
+
+<span class="c1"># create a plot for each book</span>
+<span class="n">rule</span> <span class="n">make_plot</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="n">plotcount</span><span class="o">=</span><span class="s1">&#39;source/plotcount.py&#39;</span><span class="p">,</span>
+        <span class="n">book</span><span class="o">=</span><span class="s1">&#39;processed_data/</span><span class="si">{file}</span><span class="s1">.dat&#39;</span>
+    <span class="n">output</span><span class="p">:</span> <span class="s1">&#39;results/</span><span class="si">{file}</span><span class="s1">.png&#39;</span>
+    <span class="n">shell</span><span class="p">:</span> <span class="s1">&#39;python </span><span class="si">{input.plotcount}</span><span class="s1"> </span><span class="si">{input.book}</span><span class="s1"> </span><span class="si">{output}</span><span class="s1">&#39;</span>
+
+<span class="c1"># generate summary table</span>
+<span class="n">rule</span> <span class="n">zipf_test</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="n">zipf</span><span class="o">=</span><span class="s1">&#39;source/zipf_test.py&#39;</span><span class="p">,</span>
+        <span class="n">books</span><span class="o">=</span><span class="n">expand</span><span class="p">(</span><span class="s1">&#39;processed_data/</span><span class="si">{book}</span><span class="s1">.dat&#39;</span><span class="p">,</span> <span class="n">book</span><span class="o">=</span><span class="n">DATA</span><span class="p">)</span>
+    <span class="n">output</span><span class="p">:</span> <span class="s1">&#39;results/results.txt&#39;</span>
+    <span class="n">shell</span><span class="p">:</span>  <span class="s1">&#39;python </span><span class="si">{input.zipf}</span><span class="s1"> </span><span class="si">{input.books}</span><span class="s1"> &gt; </span><span class="si">{output}</span><span class="s1">&#39;</span>
+
+<span class="c1"># create an archive with all of our results</span>
+<span class="n">rule</span> <span class="n">make_archive</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="n">expand</span><span class="p">(</span><span class="s1">&#39;results/</span><span class="si">{book}</span><span class="s1">.png&#39;</span><span class="p">,</span> <span class="n">book</span><span class="o">=</span><span class="n">DATA</span><span class="p">),</span>
+        <span class="n">expand</span><span class="p">(</span><span class="s1">&#39;processed_data/</span><span class="si">{book}</span><span class="s1">.dat&#39;</span><span class="p">,</span> <span class="n">book</span><span class="o">=</span><span class="n">DATA</span><span class="p">),</span>
+        <span class="s1">&#39;results/results.txt&#39;</span>
+    <span class="n">output</span><span class="p">:</span> <span class="s1">&#39;zipf_analysis.tar.gz&#39;</span>
+    <span class="n">shell</span><span class="p">:</span> <span class="s1">&#39;tar -czvf </span><span class="si">{output}</span><span class="s1"> </span><span class="si">{input}</span><span class="s1">&#39;</span>
+</pre></div>
+</div>
+<figure class="align-default">
+<img alt="../_images/snakemake.png" src="../_images/snakemake.png" />
+</figure>
+<p>Snakefiles contain rules that relate targets (<code class="docutils literal notranslate"><span class="pre">output</span></code>)
+to dependencies (<code class="docutils literal notranslate"><span class="pre">input</span></code>) and commands (<code class="docutils literal notranslate"><span class="pre">shell</span></code>).
+Let’s try it out. Since version 5.11 one needs to specify number
+of cores (or jobs) using <code class="docutils literal notranslate"><span class="pre">-j</span></code>, <code class="docutils literal notranslate"><span class="pre">--jobs</span></code> or <code class="docutils literal notranslate"><span class="pre">--cores</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ snakemake --delete-all-output -j 1
+$ snakemake -j 1
+</pre></div>
+</div>
+<p>Snakemake uses <strong>declarative style</strong>: we describe dependencies but we
+let Snakemake figure out the series of steps to produce results
+(targets). Fun fact: Excel is also declarative, not imperative.</p>
+<p>Try running <code class="docutils literal notranslate"><span class="pre">snakemake</span></code> again and observe that and discuss why it refused to rerun all steps:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ snakemake -j 1
+
+Building DAG of jobs...
+Nothing to be done.
+</pre></div>
+</div>
+<p>Make a modification to a txt or a dat file and run <code class="docutils literal notranslate"><span class="pre">snakemake</span></code> again and discuss
+what you see. One way to modify files is to use the <code class="docutils literal notranslate"><span class="pre">touch</span></code> command which will
+only update its timestamp:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ touch results/results.txt  # make it look like the file has been changed
+$ snakemake -j 1
+</pre></div>
+</div>
+<section id="why-snakemake">
+<h3>Why Snakemake?<a class="headerlink" href="#why-snakemake" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>Gentle learning curve.</p></li>
+<li><p>Free, open-source, and installs easily via conda or pip.</p></li>
+<li><p>Cross-platform (Windows, MacOS, Linux) and compatible with all HPC schedulers</p>
+<ul>
+<li><p>same workflow works without modification and scales appropriately whether on a laptop or cluster.</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://twitter.com/carl_witt/status/1103951128046301185">Heavily used in bioinformatics</a>, but is completely general.</p></li>
+</ul>
+</section>
+<section id="snakemake-vs-make">
+<h3>Snakemake vs. Make<a class="headerlink" href="#snakemake-vs-make" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>Workflows defined in Python scripts extended by declarative code to define rules:</p>
+<ul>
+<li><p>anything that can be done in Python can be done with Snakemake</p></li>
+<li><p>rules work much like in GNU Make (can call any commands/executables)</p></li>
+</ul>
+</li>
+<li><p>Possible to define isolated software environments per rule.</p></li>
+<li><p>Also possible to run workflows in Docker or Singularity containers.</p></li>
+<li><p>Workflows can be pushed out to run on a cluster or in the cloud without modifications to scale up.</p></li>
+</ul>
+</section>
+<section id="integrated-package-management">
+<h3>Integrated package management<a class="headerlink" href="#integrated-package-management" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>Isolated software environments per rule using conda. Invoke by <code class="docutils literal notranslate"><span class="pre">snakemake</span> <span class="pre">--use-conda</span></code>. Example:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rule</span> <span class="n">NAME</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="s2">&quot;table.txt&quot;</span>
+    <span class="n">output</span><span class="p">:</span>
+        <span class="s2">&quot;plots/myplot.pdf&quot;</span>
+    <span class="n">conda</span><span class="p">:</span>
+        <span class="s2">&quot;envs/ggplot.yaml&quot;</span>
+    <span class="n">script</span><span class="p">:</span>
+        <span class="s2">&quot;scripts/plot-stuff.R&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="visualizing-the-workflow">
+<h3>Visualizing the workflow<a class="headerlink" href="#visualizing-the-workflow" title="Permalink to this headline"></a></h3>
+<p>We can visualize the directed acyclic graph (DAG) of our current Snakefile
+using the <code class="docutils literal notranslate"><span class="pre">--dag</span></code> option, which will output the DAG in <code class="docutils literal notranslate"><span class="pre">dot</span></code> language.</p>
+<p><strong>Note</strong>: This requires the <a class="reference external" href="https://www.graphviz.org/">Graphviz software</a>,
+which can be installed by <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">graphviz</span></code>). It’s not necessary to
+run this step yourself.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ snakemake -j <span class="m">1</span> --dag <span class="p">|</span> dot -Tpng &gt; dag.png
+</pre></div>
+</div>
+<p>Rules that have yet to be completed are indicated with solid outlines, while already completed rules are indicated with dashed outlines.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/snakemake_dag.png"><img alt="Snakemake DAG" src="../_images/snakemake_dag.png" style="width: 100%;" /></a>
+</figure>
+<div class="admonition-discussion discussion attention admonition" id="discussion-0">
+<p class="admonition-title">Discussion</p>
+<p>Discuss the pros and cons of these different approaches. Which are reproducible? Which scale to hundreds of books and which can it be automated?</p>
+<div class="admonition-solution solution important dropdown admonition" id="solution-0">
+<p class="admonition-title">Solution</p>
+<ul class="simple">
+<li><p>GUIs may or may not be reproducible.</p></li>
+<li><p>Some GUIs can be automated, many cannot.</p></li>
+<li><p>Typing the same series of commands for 100 similar inputs is tedious and error prone.</p></li>
+<li><p>Imperative scripts are reproducible and great for automation.</p></li>
+<li><p>Declarative workflows such as Snakemake are great for longer multi-step analyses.</p></li>
+<li><p>Declarative workflows are often easy to parallelize without you changing anything.</p></li>
+<li><p>With declarative workflows it is no problem to add/change things late in the project.</p></li>
+<li><p>Interesting modern alternative to Make/Snakemake: <a class="reference external" href="https://taskfile.dev">https://taskfile.dev</a></p></li>
+<li><p>Many <a class="reference external" href="https://github.com/common-workflow-language/common-workflow-language/wiki/Existing-Workflow-systems">specialized frameworks</a> exist.</p></li>
+</ul>
+</div>
+</div>
+<ul class="simple">
+<li><p>There is a lot more: <a class="reference external" href="https://snakemake.github.io/">snakemake.github.io</a>.</p></li>
+</ul>
+<hr class="docutils" />
+</section>
+<section id="exercise-using-snakemake">
+<span id="using-snakemake"></span><h3>Exercise - Using Snakemake<a class="headerlink" href="#exercise-using-snakemake" title="Permalink to this headline"></a></h3>
+<div class="admonition-workflow-1-using-snakemake exercise important admonition" id="exercise-0">
+<p class="admonition-title">Workflow-1: Using Snakemake</p>
+<p>Having followed the “Exercise preparation” above, make sure that you are in the <code class="docutils literal notranslate"><span class="pre">word-count</span></code> repository.</p>
+<ol class="simple">
+<li><p>Start by cleaning all output with <code class="docutils literal notranslate"><span class="pre">snakemake</span> <span class="pre">--delete-all-output</span> <span class="pre">-j</span> <span class="pre">1</span></code>.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">snakemake</span> <span class="pre">-j</span> <span class="pre">1</span></code>. How many jobs are run?</p></li>
+<li><p>Try “touching” the file <code class="docutils literal notranslate"><span class="pre">data/sierra.txt</span></code> (<code class="docutils literal notranslate"><span class="pre">touch</span> <span class="pre">data/sierra.txt</span></code>
+(unix/git bash) or <code class="docutils literal notranslate"><span class="pre">copy</span> <span class="pre">/b</span> <span class="pre">data\sierra.txt</span> <span class="pre">+,,</span></code> (windows cmd /anaconda prompt) )
+and rerun snakemake. This makes it look like the file has changed as its
+timestamp is updated.<br />
+Which steps of the workflow are run now, and why?</p></li>
+<li><p>Now touch the file <code class="docutils literal notranslate"><span class="pre">processed_data/sierra.dat</span></code> to update the
+timestamp, and run
+<code class="docutils literal notranslate"><span class="pre">snakemake</span> <span class="pre">-S</span></code> (-S stands for summary). Can you make sense of the output?</p></li>
+<li><p>Rerun snakemake. Which steps are run, and why?</p></li>
+<li><p>Finally try touching <code class="docutils literal notranslate"><span class="pre">source/wordcount.py</span></code> and rerun snakemake.
+Which steps are run, and why? Should source codes be considered
+dependencies?</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">time</span></code> command to see if you get any speedup from
+executing snakemake rules on multiple cores. For example to run
+4 parallel threads, use <code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">snakemake</span> <span class="pre">-j</span> <span class="pre">4</span></code>.</p></li>
+<li><p>Try archiving the entire workflow with
+<code class="docutils literal notranslate"><span class="pre">snakemake</span> <span class="pre">-j</span> <span class="pre">1</span> <span class="pre">--archive</span> <span class="pre">my-workflow.tar.gz</span></code>.</p></li>
+</ol>
+<div class="admonition-solution solution important dropdown admonition" id="solution-1">
+<p class="admonition-title">Solution</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">snakemake</span> <span class="pre">--delete-all-output</span> <span class="pre">-j</span> <span class="pre">1</span></code>, where <code class="docutils literal notranslate"><span class="pre">-j</span> <span class="pre">1</span></code> (you could also
+use <code class="docutils literal notranslate"><span class="pre">--cores</span> <span class="pre">1</span></code> instead) specifies the number of CPU cores used for
+execution. It should display something like <em>deleting x</em>, while
+deleting previously created files (if you ran this before, otherwise
+nothing).</p></li>
+<li><p>Then run the process again with <code class="docutils literal notranslate"><span class="pre">snakemake</span> <span class="pre">-j</span> <span class="pre">1</span></code>.
+If everything went well, it should have run 11
+jobs in total. Most rules have run once, but count_words and make_plot
+are run 4 times each (once for each input book). In the text printed below this
+in your terminal you can see when each job was run and what was done
+in each job.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">touch</span> <span class="pre">data/sierra.txt</span></code> (unix/git bash) or <code class="docutils literal notranslate"><span class="pre">copy</span> <span class="pre">/b</span> <span class="pre">data\sierra.txt</span> <span class="pre">+,,</span></code> (windows cmd /anaconda prompt): this command updates the
+timestamp of the file, for the program it looks like the file has been
+updated/changed and will need to be reprocessed by all following steps
+that are depending on this output (i.e. that use this output to do
+something else with it). So, once you call <code class="docutils literal notranslate"><span class="pre">snakemake</span> <span class="pre">-j</span> <span class="pre">1</span></code> again,
+only the jobs concerning the sierra dataset will be rerun, not all the
+processes of unchanged files. Snakemake determines which of the
+following processing steps will need to be rerun once an input file is
+updated. Hence e.g. make_plot is also rerun, since its input (the
+output of count_words) ‘changed’.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">touch</span> <span class="pre">processed_data/sierra.dat</span></code> (unix/git bash) or <code class="docutils literal notranslate"><span class="pre">copy</span> <span class="pre">/b</span> <span class="pre">processed_data/sierra.dat</span> <span class="pre">+,,</span></code> (windows cmd /anaconda prompt), then
+run <code class="docutils literal notranslate"><span class="pre">snakemake</span> <span class="pre">-S</span></code> (-S stands for summary). This does not run any jobs
+but gives an overview of what is the status (status column) of each
+step and what will be run the next time snakemake is run (plan
+column). Note that the column headers may appear not right above the
+columns below, check spaces to connect columns with their column
+names). Also note, that the default rule ‘all’ is not shown in
+summary.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">snakemake</span> <span class="pre">-j</span> <span class="pre">1</span></code>. 4 jobs are run. You may have expected 3 as in the
+summary only 3 steps had the <em>upadte pending</em> planned. However, as
+mentioned above, the default rule ‘all’ was not shown in summary and
+also needs to be executed in order to run the following steps.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">touch</span> <span class="pre">source/wordcount.py</span></code> (unix/git bash) or <code class="docutils literal notranslate"><span class="pre">copy</span> <span class="pre">/b</span> <span class="pre">source/wordcount.py</span> <span class="pre">+,,</span></code> (windows cmd /anaconda prompt), then
+<code class="docutils literal notranslate"><span class="pre">snakemake</span> <span class="pre">-j</span> <span class="pre">1</span></code>. Until now we only ‘changed’ the output files. Here
+we actually ‘change’ a script that produces these output files. Since
+the wordcount.py is the very first script in the workflow on whose
+results all other processes depend on, everything is run again. By
+updating the scripts timestamp, snakemake assumes something has
+changed in the scripts that may influence the output of the script,
+and therefore also the output of every following step. Therefore it
+will run all the following steps again. In this case if you would
+actually change something in the wordcount.py script it would change
+the output, which means if you want your research to be reproducible,
+the source code as is has to be a dependency to get the same results
+as you did now.</p></li>
+<li><p>The speedup achieved with running on 4 instead of 1 core might be
+small but it should still exist is terms of time. The example is only
+small, but when running tasks where each step takes much longer to
+run, this is one possible way of speeding things up.</p></li>
+<li><p>For more information on archiving, see <a class="reference external" href="https://snakemake.readthedocs.io/en/stable/snakefiles/deployment.html#sustainable-and-reproducible-archiving">the official documentation</a></p></li>
+</ol>
+</div>
+</div>
+</section>
+<section id="exercise-snakemake-with-conda-environments">
+<span id="snakemake-with-conda-environments"></span><h3>Exercise - Snakemake with conda environments<a class="headerlink" href="#exercise-snakemake-with-conda-environments" title="Permalink to this headline"></a></h3>
+<div class="admonition-optional-workflow-2-snakemake-and-conda exercise important admonition" id="exercise-1">
+<p class="admonition-title">(Optional) Workflow-2: Snakemake and Conda</p>
+<p>Let’s say that the <code class="docutils literal notranslate"><span class="pre">make_plot</span></code> rule, which runs the
+<code class="docutils literal notranslate"><span class="pre">source/plotcount.py</span></code> script, requires a separate
+software environment.</p>
+<ol class="simple">
+<li><p>Create an environment file <code class="docutils literal notranslate"><span class="pre">plotting.yml</span></code> in a new directory <code class="docutils literal notranslate"><span class="pre">envs/</span></code>.
+It should contain <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> in the <code class="docutils literal notranslate"><span class="pre">channels</span></code> section and the packages
+<code class="docutils literal notranslate"><span class="pre">numpy=1.17.3</span></code> and <code class="docutils literal notranslate"><span class="pre">matplotlib=3.1.1</span></code> in the <code class="docutils literal notranslate"><span class="pre">dependencies</span></code> section.</p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">make_plot</span></code> rule in the Snakefile, add a <code class="docutils literal notranslate"><span class="pre">conda</span></code> directive
+where you provide the path to the new environment file.</p></li>
+<li><p>First clear all output and then rerun <code class="docutils literal notranslate"><span class="pre">snakemake</span></code> with the
+<code class="docutils literal notranslate"><span class="pre">--use-conda</span> <span class="pre">--conda-frontend</span> <span class="pre">conda</span></code> flags (the latter is needed because <code class="docutils literal notranslate"><span class="pre">snakemake</span></code> prefers to use the <code class="docutils literal notranslate"><span class="pre">mamba</span></code> replacement for <code class="docutils literal notranslate"><span class="pre">conda</span></code>). Observe how snakemake downloads and installs
+packages and activates the environment. The new environment is
+stored in <code class="docutils literal notranslate"><span class="pre">.snakemake/conda/$hash</span></code> where $hash is the MD5 hash of
+the environment file content. Updates to the environment definition
+are thus automatically detected.</p></li>
+</ol>
+<div class="admonition-solution solution important dropdown admonition" id="solution-2">
+<p class="admonition-title">Solution</p>
+<ol>
+<li><p>Checkout the <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-file-manually">Anaconda
+documentation</a>
+on how to manually create a yml file. Make sure to create the
+<code class="docutils literal notranslate"><span class="pre">plotting.yml</span></code> file in the right directory. Open your preferred
+editor, and add the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">name</span><span class="p">:</span> <span class="n">plotting</span>
+<span class="n">channels</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+<span class="n">dependencies</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">numpy</span><span class="o">=</span><span class="mf">1.17.3</span>
+  <span class="o">-</span> <span class="n">matplotlib</span><span class="o">=</span><span class="mf">3.1.1</span>
+</pre></div>
+</div>
+</li>
+<li><p>The make plot part of the snakemake file should be something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="c1"># create a plot for each book</span>
+<span class="n">rule</span> <span class="n">make_plot</span><span class="p">:</span>
+   <span class="nb">input</span><span class="p">:</span>
+       <span class="n">plotcount</span><span class="o">=</span><span class="s1">&#39;source/plotcount.py&#39;</span><span class="p">,</span>
+       <span class="n">book</span><span class="o">=</span><span class="s1">&#39;processed_data/</span><span class="si">{file}</span><span class="s1">.dat&#39;</span>
+   <span class="n">output</span><span class="p">:</span> <span class="s1">&#39;results/</span><span class="si">{file}</span><span class="s1">.png&#39;</span>
+   <span class="n">conda</span><span class="p">:</span> <span class="s2">&quot;envs/plotting.yml&quot;</span>
+   <span class="n">shell</span><span class="p">:</span> <span class="s1">&#39;python </span><span class="si">{input.plotcount}</span><span class="s1"> </span><span class="si">{input.book}</span><span class="s1"> </span><span class="si">{output}</span><span class="s1">&#39;</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</li>
+<li><p>First, run <code class="docutils literal notranslate"><span class="pre">snakemake</span> <span class="pre">--delete-all-output</span> <span class="pre">-j</span> <span class="pre">1</span></code> to clear all
+output. Then, run <code class="docutils literal notranslate"><span class="pre">snakemake</span> <span class="pre">--use-conda</span> <span class="pre">--conda-frontend</span> <span class="pre">conda</span> <span class="pre">-j</span> <span class="pre">1</span></code>. Snakemake now finds
+the envs/plotting.yml file and executes the make_plot rule inside a conda environment.</p></li>
+</ol>
+</div>
+</div>
+</section>
+<section id="exercise-snakemake-on-high-performance-computers">
+<span id="snakemake-in-hpc"></span><h3>Exercise - Snakemake on High Performance Computers<a class="headerlink" href="#exercise-snakemake-on-high-performance-computers" title="Permalink to this headline"></a></h3>
+<div class="admonition-optional-workflow-3-snakemake-on-hpc exercise important admonition" id="exercise-2">
+<p class="admonition-title">(Optional) Workflow-3: Snakemake on HPC</p>
+<ul class="simple">
+<li><p>On a cluster node, Snakemake uses as many cores as available on that node. If a program that is run in a rule can only run efficiently up to a given number of CPU threads, it’s possible to manually set a maximum in the rule definition:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rule</span> <span class="n">count_words</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="n">wc</span><span class="o">=</span><span class="s1">&#39;source/wordcount.py&#39;</span><span class="p">,</span>
+        <span class="n">book</span><span class="o">=</span><span class="s1">&#39;data/</span><span class="si">{file}</span><span class="s1">.txt&#39;</span>
+    <span class="n">output</span><span class="p">:</span> <span class="s1">&#39;processed_data/</span><span class="si">{file}</span><span class="s1">.dat&#39;</span>
+    <span class="n">threads</span><span class="p">:</span> <span class="mi">4</span>
+    <span class="n">log</span><span class="p">:</span> <span class="s1">&#39;processed_data/</span><span class="si">{file}</span><span class="s1">.log&#39;</span>
+    <span class="n">shell</span><span class="p">:</span> <span class="s1">&#39;python </span><span class="si">{input.wc}</span><span class="s1"> </span><span class="si">{input.book}</span><span class="s1"> </span><span class="si">{output}</span><span class="s1"> &gt;&gt; </span><span class="si">{log}</span><span class="s1"> 2&gt;&amp;1&#39;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Transferring your workflow to a cluster:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ snakemake --archive myworkflow.tar.gz -j 1
+$ scp myworkflow.tar.gz &lt;some-cluster&gt;
+$ ssh &lt;some-cluster&gt;
+$ tar zxf myworkflow.tar.gz
+$ cd myworkflow
+$ snakemake -n --use-conda -j 1
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Interoperability with Slurm:</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;__default__&quot;</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;account&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;a_slurm_submission_account&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;mem&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1G&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0:5:0&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;count_words&quot;</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0:10:0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;mem&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2G&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The workflow can now be executed by:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ snakemake -j <span class="m">100</span> --cluster-config cluster.json --cluster <span class="s2">&quot;sbatch -A {cluster.account} --mem={cluster.mem} -t {cluster.time} -c {threads}&quot;</span>
+</pre></div>
+</div>
+<p>Note that in this case <code class="docutils literal notranslate"><span class="pre">-j</span></code> does not correspond to the number of cores
+used, instead it represents the maximum number of jobs that Snakemake
+is allowed to have submitted at the same time.  The <code class="docutils literal notranslate"><span class="pre">--cluster-config</span></code>
+flag specifies the config file for the particular cluster, and the
+<code class="docutils literal notranslate"><span class="pre">--cluster</span></code> flag specifies the command used to submit jobs on the
+particular cluster.</p>
+</div>
+<hr class="docutils" />
+<div class="admonition-keypoints keypoints admonition" id="keypoints-0">
+<p class="admonition-title">Keypoints</p>
+<ul class="simple">
+<li><p>Preserve the steps for re-generating published results.</p></li>
+<li><p>Hundreds of workflow management tools exist.</p></li>
+<li><p>Snakemake is a comparatively simple and lightweight option to create transferable and scalable data analyses.</p></li>
+<li><p>Sometimes a script is enough.</p></li>
+</ul>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../dependencies/" class="btn btn-neutral float-left" title="Recording dependencies" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../environments/" class="btn btn-neutral float-right" title="Recording environments" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright CodeRefinery team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

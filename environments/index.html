@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recording environments &mdash; Reproducible research  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx_lesson.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx_rtd_theme_ext_color_contrast.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Sharing code and data" href="../sharing/" />
+    <link rel="prev" title="Recording computational steps" href="../workflow-management/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../" class="icon icon-home"> Reproducible research
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Core episodes</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../motivation/">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../organizing-projects/">Organizing your projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dependencies/">Recording dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow-management/">Recording computational steps</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Recording environments</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#containers">Containers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#docker">Docker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#examples-of-useful-docker-images">Examples of useful Docker images</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#singularity">Singularity</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#container-vs-image-vs-recipe-dockerfile">Container vs. image vs. recipe (Dockerfile)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pros-and-cons-of-containers">Pros and cons of containers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exercise-play-with-docker">Exercise - Play with Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../sharing/">Sharing code and data</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optional episodes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../docker/">Creating and sharing a container image</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../exercises/">List of exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/">Instructor guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/">Quick reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Reproducible research</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
+      <li>Recording environments</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/coderefinery/reproducible-research/blob/main/content/environments.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="recording-environments">
+<h1>Recording environments<a class="headerlink" href="#recording-environments" title="Permalink to this headline"></a></h1>
+<div class="admonition-questions questions admonition" id="questions-0">
+<p class="admonition-title">Questions</p>
+<ul class="simple">
+<li><p>How to capture the software environment of a computational experiment?</p></li>
+</ul>
+</div>
+<div class="admonition-instructor-note instructor-note admonition" id="instructor-note-0">
+<p class="admonition-title">Instructor note</p>
+<ul class="simple">
+<li><p>15 min teaching</p></li>
+<li><p>0 min exercises</p></li>
+</ul>
+</div>
+<section id="containers">
+<h2>Containers<a class="headerlink" href="#containers" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Containers can be built to bundle <em>all the necessary ingredients</em> (data, code, environment).</p></li>
+<li><p>A container provides operating-system-level virtualization, sharing the host system’s kernel with other containers.</p></li>
+<li><p>Popular container implementations are <a class="reference external" href="https://www.docker.com/">Docker</a> and <a class="reference external" href="http://singularity.lbl.gov/">Singularity</a>.</p></li>
+</ul>
+<section id="docker">
+<h3>Docker<a class="headerlink" href="#docker" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>Available for most common operating systems.</p></li>
+<li><p>A mechanism to “send the computer to the data” when data is too
+large or too sensitive to travel over network.</p></li>
+<li><p><a class="reference external" href="https://hub.docker.com/">DockerHub</a> is a platform to share Docker images (stored in repositories - similar to a Git repository).</p></li>
+<li><p>Public Docker images available on <a class="reference external" href="https://hub.docker.com/">DockerHub</a>.</p></li>
+<li><p>A docker container is like a piece of paper with all the operating system on it. When you run it,
+a transparent sheet is placed on top to form a container. The container runs and writes only on
+that transparent sheet (and what other mounts have been layered on top). When you are done,
+transparency is thrown away. It can be repeated as often as you want, and base is always the same.</p></li>
+</ul>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Use only official and trusted images!
+Not all images can be trusted! There have been examples of contaminated
+images so investigate before using images blindly. Apply same caution as installing
+software packages from untrusted package repositories.</p>
+</div>
+<section id="examples-of-useful-docker-images">
+<h4>Examples of useful Docker images<a class="headerlink" href="#examples-of-useful-docker-images" title="Permalink to this headline"></a></h4>
+<ol>
+<li><p>Run a specific version of <em>Rstudio</em></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker run --rm -p <span class="m">8787</span>:8787 -e <span class="nv">PASSWORD</span><span class="o">=</span>yourpasswordhere rocker/rstudio
+</pre></div>
+</div>
+<p>Then open your browser to
+<a class="reference external" href="http://localhost:8787">http://localhost:8787</a> with login rstudio
+and password “yourpasswordhere” used in the previous command.  If
+you want to try an older version you can check the tags at
+<a class="reference external" href="https://hub.docker.com/r/rocker/rstudio/tags">https://hub.docker.com/r/rocker/rstudio/tags</a>
+and run for example</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker run --rm -p <span class="m">8787</span>:8787 -e <span class="nv">PASSWORD</span><span class="o">=</span>yourpasswordhere rocker/rstudio:3.3
+</pre></div>
+</div>
+</li>
+<li><p>Run a specific version of <em>Anaconda3</em> from
+<a class="reference external" href="https://hub.docker.com/r/continuumio/anaconda3">https://hub.docker.com/r/continuumio/anaconda3</a></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker run -i -t continuumio/anaconda3 /bin/bash
+</pre></div>
+</div>
+<p>and similarly one can also pick an image for <em>Anaconda2</em> at
+<a class="reference external" href="https://hub.docker.com/r/continuumio/anaconda2/tags">https://hub.docker.com/r/continuumio/anaconda2/tags</a></p>
+</li>
+</ol>
+</section>
+</section>
+<section id="singularity">
+<h3>Singularity<a class="headerlink" href="#singularity" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="http://singularity.lbl.gov/">Singularity</a> is aimed at scientific community and to run scientific workflows on HPC resources.</p></li>
+<li><p>Docker images can be converted into Singularity images.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="container-vs-image-vs-recipe-dockerfile">
+<h2>Container vs. image vs. recipe (Dockerfile)<a class="headerlink" href="#container-vs-image-vs-recipe-dockerfile" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Image is like a blueprint. It is immutable.</p></li>
+<li><p>Container is an instance of an image.</p></li>
+<li><p>Dockerfile is a recipe which creates a container based on an image and applies small changes to it.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="pros-and-cons-of-containers">
+<h2>Pros and cons of containers<a class="headerlink" href="#pros-and-cons-of-containers" title="Permalink to this headline"></a></h2>
+<p>Containers are popular for a reason - they solve a number of
+important problems:</p>
+<ul class="simple">
+<li><p>Allow for seamlessly moving workflows across different platforms.</p></li>
+<li><p>Much more lightweight than virtual machines.</p></li>
+<li><p>Eliminates the “works on my machine” situation.</p></li>
+<li><p>For software with many dependencies, in turn with its own dependencies,
+containers offer possibly the only way to preserve the
+computational experiment for future reproducibility.</p></li>
+</ul>
+<p>However, containers may also have some drawbacks:</p>
+<ul class="simple">
+<li><p>Containers can have security vulnerabilities which can be exploited.</p></li>
+<li><p>Can be used to hide away software installation problems and thereby
+discourage good software development practices.</p></li>
+<li><p>It may not be clear whether to record the environment in the image part or the recipe part.</p></li>
+</ul>
+<div class="admonition-reproducibility-aspects-of-container-images discussion attention admonition" id="discussion-0">
+<p class="admonition-title">Reproducibility aspects of container images</p>
+<ul class="simple">
+<li><p>Do you think containers contribute to reproducible research?</p></li>
+<li><p>Do you see a use case for your own work?</p></li>
+</ul>
+</div>
+</section>
+<hr class="docutils" />
+<section id="exercise-play-with-docker">
+<h2>Exercise - Play with Docker<a class="headerlink" href="#exercise-play-with-docker" title="Permalink to this headline"></a></h2>
+<div class="admonition-optional-environment-1-play-with-docker exercise important admonition" id="exercise-0">
+<p class="admonition-title">(Optional) Environment-1: Play with Docker</p>
+<ol>
+<li><p>This exercise requires a DockerHub account. You can sign up on <a class="reference external" href="https://hub.docker.com/signup">https://hub.docker.com/signup</a>.</p></li>
+<li><p>Go to <a class="reference external" href="https://labs.play-with-docker.com/">Play with Docker</a> and log in using
+your DockerHub account.</p></li>
+<li><p>Click on “Add new instance” - you now have a free Alpine Linux Virtual Machine in browser where you can build and run Docker containers</p></li>
+<li><p>Pull the hello-world image from DockerHub:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker pull hello-world
+</pre></div>
+</div>
+</li>
+<li><p>List local images:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker image ls
+</pre></div>
+</div>
+</li>
+<li><p>Now create a new container from the image and run it:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker run hello-world
+</pre></div>
+</div>
+<p>This should output “Hello from Docker!” followed by a description of what just happened:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="m">1</span>. The Docker client contacted the Docker daemon.
+<span class="m">2</span>. The Docker daemon pulled the <span class="s2">&quot;hello-world&quot;</span> image from the Docker Hub.
+   <span class="o">(</span>amd64<span class="o">)</span>
+<span class="m">3</span>. The Docker daemon created a new container from that image which runs the
+   executable that produces the output you are currently reading.
+<span class="m">4</span>. The Docker daemon streamed that output to the Docker client, which sent it
+   to your terminal.
+</pre></div>
+</div>
+</li>
+<li><p>The hello-world image can’t do much more than this. For a more interesting
+challenge, we can run bash in interactive mode using the ubuntu image from DockerHub. The following command automatically pulls the image before creating the container:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker run -it ubuntu bash
+</pre></div>
+</div>
+<p>Notice that the command prompt changed - we are now “inside” a live container. We can double-check that we’re indeed in an Ubuntu environment:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cat /etc/os-release
+</pre></div>
+</div>
+</li>
+<li><p>Exit the container by typing <code class="docutils literal notranslate"><span class="pre">exit</span></code>.</p></li>
+<li><p>Challenge: run an ubuntu container and make it print “Hello from Ubuntu!”.</p></li>
+</ol>
+<div class="admonition-solution solution important dropdown admonition" id="solution-0">
+<p class="admonition-title">Solution</p>
+<p>We use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">ubuntu</span></code> to run a container from the ubuntu image, and give
+it the command <code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">&quot;Hello</span> <span class="pre">from</span> <span class="pre">Ubuntu!&quot;</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker run ubuntu <span class="nb">echo</span> <span class="s2">&quot;Hello from Ubuntu!&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../workflow-management/" class="btn btn-neutral float-left" title="Recording computational steps" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../sharing/" class="btn btn-neutral float-right" title="Sharing code and data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright CodeRefinery team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
